@@ -8,7 +8,7 @@ DeleteCommand::DeleteCommand(SharedPtr<Object> mainObj, MyString&& path) : mainO
 void DeleteCommand::execute()
 {
 	
-	MyString* pathArr = new MyString[1];
+	MyString* pathArr;
 	size_t pathSize = 0;
 
 	buildPath(path, pathArr, pathSize);

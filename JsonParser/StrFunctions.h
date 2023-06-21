@@ -33,9 +33,10 @@ static size_t countOf(const MyString& str, char c)
 	return count;
 }
 
-static void buildPath(const MyString& pathStr, MyString* pathArr, size_t pathSize)
+static void buildPath(const MyString& pathStr, MyString*& pathArr, size_t& pathSize)
 {
 	pathSize = countOf(pathStr, '/') + 1;
+
 	pathArr = new MyString[pathSize];
 
 	int indexOfFirst = indexOf(pathStr, '/', 1);
@@ -47,7 +48,7 @@ static void buildPath(const MyString& pathStr, MyString* pathArr, size_t pathSiz
 	}
 	else
 	{
-		pathArr[0] = pathStr.substr(0, indexOf(pathStr, '/', 1) - 1);
+		pathArr[0] = pathStr.substr(0, indexOfFirst - 1);
 	}
 	
 	int indexOfLast = 0;

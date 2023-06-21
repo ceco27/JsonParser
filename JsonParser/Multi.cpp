@@ -47,7 +47,7 @@ void Multi::deleteAt(const MyString* pathArr, size_t pathSize)
 
 	for (size_t i = 0; i < typesSize; i++)
 	{
-		if (types[i]->checkFieldNameMatches(pathArr[indent - 1]))
+		if (types[i]->checkFieldNameMatches(pathArr[indent]))
 		{
 			if (pathSize - 1 == indent)
 			{
