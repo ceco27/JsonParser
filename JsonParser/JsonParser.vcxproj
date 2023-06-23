@@ -131,6 +131,7 @@
     <ClCompile Include="CommandExecutor.cpp" />
     <ClCompile Include="CreateCommand.cpp" />
     <ClCompile Include="DeleteCommand.cpp" />
+    <ClCompile Include="HelpCommand.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="Multi.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="CreateCommand.h" />
     <ClInclude Include="DeleteCommand.h" />
+    <ClInclude Include="HelpCommand.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="Multi.h" />
     <ClInclude Include="MyString.h" />

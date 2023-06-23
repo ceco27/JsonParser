@@ -2,6 +2,7 @@
 #include "PrintCommand.h"
 #include "DeleteCommand.h"
 #include "MyString.h"
+#include "SetCommand.h"
 
 namespace
 {
@@ -41,6 +42,13 @@ Command* CommandFactory::getCommand(SharedPtr<Object> object) const
 			MyString path;
 			std::cin >> path;
 			return new DeleteCommand(object, std::move(path));
+		}
+		if (inputCommand == "set")
+		{
+			MyString path;
+			MyString value;
+			std::cin >> path >> value;
+			return new SetCommand(object, std::move(path), std::move(value));
 		}
 	}
 

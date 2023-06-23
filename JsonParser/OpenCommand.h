@@ -9,7 +9,7 @@ class OpenCommand : public Command
 	MyString fileName;
 public:
 	OpenCommand(SharedPtr<Object> mainObj, MyString fileName);
-	void execute();
+	void execute() override;
 private:
 	Type* buildType(const MyString& typeStr, size_t indent); //typeStr - singular type string to be added to an object
 	Primitive* buildPrimitive(const MyString& typeStr, size_t indent);

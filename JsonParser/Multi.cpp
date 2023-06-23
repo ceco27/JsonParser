@@ -23,11 +23,11 @@ void Multi::setValue(const MyString* pathArr, size_t pathSize, MyString&& value)
 
 	for (size_t i = 0; i < typesSize; i++)
 	{
-		if (types[i]->checkFieldNameMatches(pathArr[indent - 1]))
+		if (types[i]->checkFieldNameMatches(pathArr[indent]))
 		{
 			if (pathSize - 1 == indent)
 			{
-				types[i] = new Primitive(pathArr[indent - 1], indent, value);
+				types[i] = new Primitive(pathArr[indent], indent + 1, value);
 				return;
 			}
 			else
