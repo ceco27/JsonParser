@@ -43,15 +43,15 @@ static void buildPath(const MyString& pathStr, MyString*& pathArr, size_t& pathS
 
 	if (pathSize == 1)
 	{
-		pathArr[0] = pathStr;
+		pathArr[0] = pathStr.substr(1, pathStr.length() - 2);
 		return;
 	}
 	else
 	{
-		pathArr[0] = pathStr.substr(0, indexOfFirst - 1);
+		pathArr[0] = pathStr.substr(1, indexOfFirst - 1);
 	}
 	
-	int indexOfLast = 0;
+	int indexOfLast = indexOfFirst;
 	for (size_t i = 1; i < pathSize - 1; i++)
 	{
 		int indexPrev = indexOf(pathStr, '/', i);
@@ -59,7 +59,7 @@ static void buildPath(const MyString& pathStr, MyString*& pathArr, size_t& pathS
 
 		indexOfLast = indexNext;
 
-		pathArr[1] = pathStr.substr(indexPrev + 1, indexNext - indexPrev - 1);
+		pathArr[1] = pathStr.substr(indexPrev + 1, indexNext - indexPrev - 2);
 	}
 
 	pathArr[pathSize - 1] = pathStr.substr(indexOfLast + 1, pathStr.length() - indexOfLast - 2);

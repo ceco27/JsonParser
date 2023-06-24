@@ -28,7 +28,14 @@ int main()
 			while (true)
 			{
 				executor.setCommand(CommandFactory::getInstance().getCommand(object));
-				executor.execute();
+				try
+				{
+					executor.execute();
+				}
+				catch (std::exception& e)
+				{
+					std::cout << e.what();
+				}
 			}
 			return 0;
 		}

@@ -2,7 +2,7 @@
 #include "Command.h"
 class CommandExecutor
 {
-	Command* command;
+	Command* command = nullptr;
 	Command* onEnd;
 public:
 	CommandExecutor() = default;

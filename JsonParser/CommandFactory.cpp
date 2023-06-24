@@ -3,6 +3,11 @@
 #include "DeleteCommand.h"
 #include "MyString.h"
 #include "SetCommand.h"
+#include "SaveCommand.h"
+#include "SaveAsCommand.h"
+#include "CreateCommand.h"
+#include "MoveCommand.h"
+#include <sstream>
 
 namespace
 {
@@ -20,35 +25,145 @@ namespace
 
 		return true;
 	}
+
+	size_t countWords(std::stringstream& stream)
+	{
+		int currPos = stream.tellg();
+
+		stream.seekg(0);
+
+		MyString currWord;
+		size_t count = 0;
+
+		while (stream >> currWord)
+			count++;
+
+		stream.clear();
+		stream.seekg(currPos);
+
+		return count;
+	}
 }
 
 Command* CommandFactory::getCommand(SharedPtr<Object> object) const
 {
+	char buffer[128];
 	MyString inputCommand;
 
 	while (true)
 	{
-		std::cin >> inputCommand;
+		std::cin.getline(buffer, 128);
+
+		std::stringstream inputStream(buffer);
+
+		size_t wordCount = countWords(inputStream);
+
+		inputStream >> inputCommand;
+
 		if (inputCommand == "print")
 		{
-			return new PrintCommand(object);
+			if (wordCount == 1)
+			{
+				return new PrintCommand(object);
+			}
+			else
+			{
+				throw std::exception("Invalid input!");
+			}
 		}
 		if (inputCommand == "save")
 		{
-			std::exit(0);
+			if (wordCount == 2)
+			{
+				MyString path;
+
+				inputStream >> path;
+
+			}
+			else if (wordCount == 1)
+			{
+				std::cout << "todo";
+			}
+			else
+			{
+				throw std::exception("Invalid input!");
+			}
+		}
+		if (inputCommand == "saveas")
+		{
+			if (wordCount == 3)
+			{
+
+				MyString fileName;
+				MyString path;
+
+				inputStream >> fileName >> path;
+
+				return new SaveAsCommand(object, std::move(fileName), std::move(path));
+			}
+			else if (wordCount == 2)
+			{
+				MyString fileName;
+				
+				inputStream >> fileName;
+
+				return new SaveAsCommand(object, std::move(fileName));
+			}
+			else
+			{
+				throw std::exception("Invalid input!");
+			}
 		}
 		if (inputCommand == "delete")
 		{
-			MyString path;
-			std::cin >> path;
-			return new DeleteCommand(object, std::move(path));
+			if (wordCount == 2)
+			{
+				MyString path;
+				inputStream >> path;
+				return new DeleteCommand(object, std::move(path));
+			}
+			else
+			{
+				throw std::exception("Invalid input!");
+			}
 		}
 		if (inputCommand == "set")
 		{
-			MyString path;
-			MyString value;
-			std::cin >> path >> value;
-			return new SetCommand(object, std::move(path), std::move(value));
+			if (wordCount == 3)
+			{
+				MyString path;
+				MyString value;
+				inputStream >> path >> value;
+				return new SetCommand(object, std::move(path), std::move(value));
+			}
+			else
+			{
+				throw std::exception("Invalid input!");
+			}
+		}
+		if (inputCommand == "create")
+		{
+			if (wordCount == 3)
+			{
+				MyString path;
+				MyString value;
+				inputStream >> path >> value;
+				return new CreateCommand(object, std::move(path), std::move(value));
+			}
+			else
+			{
+				throw std::exception("Invalid input!");
+			}
+		}
+		if (inputCommand == "move")
+		{
+			if (wordCount == 3)
+			{
+				MyString pathFrom;
+				MyString pathTo;
+				inputStream >> pathFrom >> pathTo;
+				return new CreateCommand(object, std::move(pathFrom), std::move(pathTo));
+			}
 		}
 	}
 

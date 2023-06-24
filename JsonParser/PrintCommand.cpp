@@ -7,4 +7,5 @@ PrintCommand::PrintCommand(SharedPtr<Object> mainObj) : mainObj(mainObj)
 void PrintCommand::execute()
 {
 	mainObj->print(std::cout);
+	std::cout << std::endl;
 }

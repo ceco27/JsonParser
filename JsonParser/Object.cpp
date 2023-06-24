@@ -23,8 +23,9 @@ void Object::print(std::ostream& os) const
 			os << "," << std::endl;
 	}
 
+	os << std::endl;
 	printIndent(os);
-	os << std::endl << "}";
+	os << "}";
 }
 
 ObjectTypes Object::getObjectType() const
@@ -51,7 +52,7 @@ void Object::create(const MyString* pathArr, size_t pathSize, MyString&& value)
 		}
 	}
 
-	if (pathSize == indent)
+	if (pathSize - 1 == indent)
 	{
 		types.pushBack(new Primitive(pathArr[indent], indent + 1, std::move(value)));
 	}

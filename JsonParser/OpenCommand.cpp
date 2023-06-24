@@ -112,7 +112,7 @@ Primitive* OpenCommand::buildPrimitive(const MyString& typeStr, size_t indent)
 	int indexOf2 = indexOf(typeStr, '\"', 2);
 	int indexOf3 = indexOf(typeStr, '\"', 3);
 	int indexOf4 = indexOf(typeStr, '\"', 4);
-	MyString fieldName = typeStr.substr(indexOf1, indexOf2 - indexOf1 + 1);
+	MyString fieldName = typeStr.substr(indexOf1 + 1, indexOf2 - indexOf1 - 1);
 	MyString value = typeStr.substr(indexOf3, indexOf4 - indexOf3 + 1);
 
 	return new Primitive(fieldName, indent, value);

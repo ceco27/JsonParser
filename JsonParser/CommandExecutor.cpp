@@ -17,6 +17,7 @@ void CommandExecutor::execute()
 
 CommandExecutor::~CommandExecutor()
 {
+	std::cout << "end";
 	if (onEnd)
 		onEnd->execute();
 }
