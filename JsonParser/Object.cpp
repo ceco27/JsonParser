@@ -1,6 +1,10 @@
 #include "Object.h"
 #include "Primitive.h"
 
+Object::Object(const MyString& fieldName, size_t indent, const MyString& fileName) : fileName(fileName), Multi(fieldName, indent)
+{
+}
+
 Object::Object(const MyString& fieldName, size_t indent) : Multi(fieldName, indent)
 {
 }
@@ -61,6 +65,11 @@ void Object::create(const MyString* pathArr, size_t pathSize, MyString&& value)
 		types.pushBack(new Object(pathArr[indent], indent + 1));
 		types[typesSize]->create(pathArr, pathSize, std::move(value));
 	}
+}
+
+const MyString& Object::getFileName() const
+{
+	return fileName;
 }
 
 Type* Object::clone() const

@@ -79,10 +79,11 @@ Command* CommandFactory::getCommand(SharedPtr<Object> object) const
 
 				inputStream >> path;
 
+				return new SaveCommand(object, std::move(path));
 			}
 			else if (wordCount == 1)
 			{
-				std::cout << "todo";
+				return new SaveCommand(object);
 			}
 			else
 			{
@@ -162,9 +163,18 @@ Command* CommandFactory::getCommand(SharedPtr<Object> object) const
 				MyString pathFrom;
 				MyString pathTo;
 				inputStream >> pathFrom >> pathTo;
-				return new CreateCommand(object, std::move(pathFrom), std::move(pathTo));
+				return new MoveCommand(object, std::move(pathFrom), std::move(pathTo));
 			}
 		}
+		if (inputCommand == "close")
+		{
+			throw - 1;
+		}
+		if (inputCommand == "exit")
+		{
+			throw - 2;
+		}
+		
 	}
 
 	return nullptr;

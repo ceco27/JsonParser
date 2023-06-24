@@ -5,10 +5,9 @@
 class SaveCommand : public Command
 {
 	SharedPtr<Object> mainObj;
-	MyString fileName;
 	MyString path;
 public:
-	SaveCommand(SharedPtr<Object> mainObj, MyString&& fileName);
-	SaveCommand(SharedPtr<Object> mainObj, MyString&& fileName, MyString&& path);
+	SaveCommand(SharedPtr<Object> mainObj);
+	SaveCommand(SharedPtr<Object> mainObj, MyString&& path);
 	void execute() override;
 };

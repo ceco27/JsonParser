@@ -7,42 +7,62 @@
 
 int main()
 {
-	CommandExecutor executor;
-	Object* object = new Object(MyString(), 0);
+	
 	while (true)
 	{
-		char inputLine[128];
-		std::cin.getline(inputLine, 1024);
-
-		std::stringstream input(inputLine);
-
-		char inputCommand[32];
-		char fileName[32];
-		input.getline(inputCommand, 32, ' ');
-		input.getline(fileName, 32);
-		if (strcmp(inputCommand, "open") == 0)
+		try
 		{
-			CommandExecutor executor(new SaveCommand(object, fileName));
-			executor.setCommand(new OpenCommand(object, fileName));
-			executor.execute();
-			while (true)
+			std::cout << "Enter command:" << std::endl;
+			char inputLine[128];
+			std::cin.getline(inputLine, 1024);
+
+			std::stringstream input(inputLine);
+
+			char inputCommand[32];
+			char fileName[32];
+			input.getline(inputCommand, 32, ' ');
+			input.getline(fileName, 32);
+			if (strcmp(inputCommand, "open") == 0)
 			{
-				executor.setCommand(CommandFactory::getInstance().getCommand(object));
-				try
+				CommandExecutor executor;
+				Object* object = new Object(MyString(), 0, fileName);
+				executor.setCommand(new OpenCommand(object, fileName));
+				executor.execute();
+				while (true)
 				{
-					executor.execute();
-				}
-				catch (std::exception& e)
-				{
-					std::cout << e.what();
+					try
+					{
+						executor.setCommand(CommandFactory::getInstance().getCommand(object));
+						executor.execute();
+					}
+					catch (int returnCode)
+					{
+						if (returnCode == -1)
+						{
+							break;
+						}
+
+						throw returnCode;
+					}
+					catch (std::exception& e)
+					{
+						std::cout << e.what();
+					}
 				}
 			}
-			return 0;
+			else if (strcmp(inputCommand, "exit") == 0)
+			{
+				throw - 2;
+			}
+			else
+			{
+				std::cout << "You have to open the file first!" << std::endl;
+			}
 		}
-		else
+		catch (int returnCode)
 		{
-			std::cout << "You have to open the file first!";
+			break;
 		}
 	}
-
+	
 }

@@ -1,11 +1,11 @@
 #include "SaveCommand.h"
 #include <fstream>
 
-SaveCommand::SaveCommand(SharedPtr<Object> mainObj, MyString&& fileName) : mainObj(mainObj), fileName(std::move(path))
+SaveCommand::SaveCommand(SharedPtr<Object> mainObj) : mainObj(mainObj), path()
 {
 }
 
-SaveCommand::SaveCommand(SharedPtr<Object> mainObj, MyString&& fileName, MyString&& path) : mainObj(mainObj), fileName(std::move(path)), path(std::move(path))
+SaveCommand::SaveCommand(SharedPtr<Object> mainObj, MyString&& path) : mainObj(mainObj), path(std::move(path))
 {
 }
 
@@ -17,10 +17,15 @@ void SaveCommand::execute()
 	}
 	else
 	{
-		std::ofstream ofs(path.c_str());
+		std::ofstream ofs(mainObj->getFieldName().c_str());
+
+		if (!ofs.is_open())
+			throw std::exception("Could not save file");
 
 		mainObj->print(ofs);
 
 		ofs.close();
 	}
+
+	throw - 1;
 }

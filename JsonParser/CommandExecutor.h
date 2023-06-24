@@ -3,10 +3,8 @@
 class CommandExecutor
 {
 	Command* command = nullptr;
-	Command* onEnd;
 public:
 	CommandExecutor() = default;
-	CommandExecutor(Command* onEnd);
 	CommandExecutor(const CommandExecutor&) = delete;
 	CommandExecutor& operator=(const CommandExecutor&) = delete;
 	void setCommand(Command* command);
