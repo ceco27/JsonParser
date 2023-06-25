@@ -27,6 +27,7 @@ public:
 	virtual void setValue(const MyString* pathArr, size_t pathSize, MyString&& value) = 0;
 	virtual void deleteAt(const MyString* pathArr, size_t pathSize) = 0;
 	virtual void create(const MyString* pathArr, size_t pathSize, MyString&& value) = 0;
+	virtual const Type& getTypeFromPath(const MyString* pathArr, size_t pathSize) const = 0;
 
 	virtual ~Type() = default;
 	

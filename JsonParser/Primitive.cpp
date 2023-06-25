@@ -37,6 +37,11 @@ void Primitive::create(const MyString* pathArr, size_t pathSize, MyString&& valu
 	throw std::exception("Invalid path!");//type creation happens from object or array
 }
 
+const Type& Primitive::getTypeFromPath(const MyString* pathArr, size_t pathSize) const
+{
+	throw std::exception("Invalid path!");//type getter happens from object or array
+}
+
 Type* Primitive::clone() const
 {
 	return new Primitive(*this);

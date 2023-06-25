@@ -13,6 +13,7 @@ public:
 	void setValue(const MyString* pathArr, size_t pathSize, MyString&& value) override;
 	void deleteAt(const MyString* pathArr, size_t pathSize) override;
 	void create(const MyString* pathArr, size_t pathSize, MyString&& value) override;
+	const Type& getTypeFromPath(const MyString* pathArr, size_t pathSize) const override;
 
 	Type* clone() const override;
 };

@@ -19,6 +19,8 @@ public:
 	void setValue(const MyString* pathArr, size_t pathSize, MyString&& value) override;
 	void deleteAt(const MyString* pathArr, size_t pathSize) override;
 
+	const Type& getTypeFromPath(const MyString* pathArr, size_t pathSize) const override;
+
 	void addToMulti(Type* type);
 
 	virtual ~Multi() = default;

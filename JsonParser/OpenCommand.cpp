@@ -94,14 +94,14 @@ Type* OpenCommand::buildType(const MyString& typeStr, size_t indent)
 	{
 		return buildPrimitive(typeStr, indent);
 	}
-	else if (indexOfCurly < indexOfSquare || indexOfSquare == -1) // object
+	/*else if (indexOfCurly < indexOfSquare || indexOfSquare == -1) // object
 	{
-		return buildObject(typeStr, indent);
+		//return buildObject(typeStr, indent);
 	}
 	else // array
 	{
-		return buildArray(typeStr, indent);
-	}
+		//return buildArray(typeStr, indent);
+	}*/
 
 	return nullptr;
 }
@@ -117,13 +117,14 @@ Primitive* OpenCommand::buildPrimitive(const MyString& typeStr, size_t indent)
 
 	return new Primitive(fieldName, indent, value);
 }
-
-Object* OpenCommand::buildObject(const MyString& typeStr, size_t indent)
+/*
+Object OpenCommand::buildObject(const MyString& typeStr, size_t indent)
 {
-	return nullptr;
+	return Object();
 }
 
-Array* OpenCommand::buildArray(const MyString& typeStr, size_t indent)
+Array OpenCommand::buildArray(const MyString& typeStr, size_t indent)
 {
-	return nullptr;
+	return Array();
 }
+*/

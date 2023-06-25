@@ -65,6 +65,28 @@ void Multi::deleteAt(const MyString* pathArr, size_t pathSize)
 	throw std::exception("Type not found");
 }
 
+const Type& Multi::getTypeFromPath(const MyString* pathArr, size_t pathSize) const
+{
+	size_t typesSize = types.getSize();
+
+	for (size_t i = 0; i < typesSize; i++)
+	{
+		if (types[i]->checkFieldNameMatches(pathArr[indent]))
+		{
+			if (pathSize - 1 == indent)
+			{
+				return *types[i];
+			}
+			else
+			{
+				return types[i]->getTypeFromPath(pathArr, pathSize);
+			}
+		}
+	}
+
+	throw std::exception("Type not found");
+}
+
 void Multi::addToMulti(Type* type)
 {
 	types.pushBack(type->clone());

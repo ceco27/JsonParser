@@ -13,6 +13,6 @@ public:
 private:
 	Type* buildType(const MyString& typeStr, size_t indent); //typeStr - singular type string to be added to an object
 	Primitive* buildPrimitive(const MyString& typeStr, size_t indent);
-	Object* buildObject(const MyString& typeStr, size_t indent);
-	Array* buildArray(const MyString& typeStr, size_t indent);
+	//Object buildObject(const MyString& typeStr, size_t indent);
+	//Array buildArray(const MyString& typeStr, size_t indent);
 };
